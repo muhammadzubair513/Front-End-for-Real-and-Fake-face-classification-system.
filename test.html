@@ -1,0 +1,202 @@
+<html>
+  <head>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>Home</title>
+
+     <style>
+
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+
+      .image-preview{
+        width: 600px;
+        min-height: 300px;
+        border: 2px solid #262626;
+        margin-top: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #858585;
+        object-fit: cover;
+        
+      }
+
+      .resultbox
+      {
+        width: 400px;
+        min-height: 50px;
+        border: 2px solid #262626;
+        margin-top: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #858585; 
+      }
+
+      .addressbox{
+        width: 600px;
+        min-height: 50px;
+        border: 2px solid #262626;
+        margin-top: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #858585; 
+      }
+
+      .image-preview_image{
+        width: 100%;
+        object-fit: cover;
+        display: none;
+       
+      }
+
+    </style>
+
+  </head>
+
+    <body class="d-flex h-100 text-center text-dark" style="background-color: #e0e0e0">
+    
+<div class="container">
+  <center>
+  <div class="my-3 mb-4 text-light rounded" style="background-color: #262626; font-family: Times New Roman;">
+    <div class="col-md-6 px-0">
+      <h3 class="p-4 p-md-5 display-7 font-italic">Real and Fake Face Detection System</h3>
+    </div>
+  </div>
+</center>
+
+  <main class="px-3">
+
+    <p class="lead">
+      <div style="max-width: 1000px;margin: 0 auto; padding: 10px;">
+      <div class="container-fluid">
+
+        <div class="row align-items-start">
+      <div class="col">
+       <div class="my-4" style="color: #262626">
+    Upload Image:
+  </div>
+</div>
+
+  <div class="addressbox" id="addressBox">
+    <div class="col">
+      <span id="custom-text">No file chossen yet</span>
+    </div>
+  </div>
+
+        <div class="col">
+      <input type="file" name="inpFile" id="inpFile" hidden="hidden">
+    <button class="btn btn-lg  my-3" style="background-color: #3b3b3b ; color: white "  id="custom-button">Upload Image</button>
+  </div>
+</div>
+</div>
+</div>
+ <div class="container">
+        <center>
+
+    <div class="image-preview" id="imagePreview">
+      <img src="" alt="Image Preview" class="image-preview_image" id="image-preview__image">
+      <span class="image-preview_default-text" id="image-preview__default-text">Image Preview</span>
+  </div>
+  <div class="container">
+    
+        <center><button class="btn btn-lg my-3" style="background-color: #3b3b3b ; color: white ">Detect</button></center>
+
+    </div>
+    <div class="resultbox" id="resultBox">
+      <h5>Real/Fake</h5>
+    </div>
+
+    </center>
+
+  
+    </p>
+
+  </main>
+
+
+  <footer class="mt-auto" style="color: #3b3b3b">
+
+    <p>Project by Muhammad Zubair & Umair Nawab</p>
+
+  </footer>
+
+</div>
+
+
+    
+    <script>
+
+      const inpFile = document.getElementById("inpFile");
+      const previewContainer = document.getElementById("imagePreview");
+      const previewImage = document.getElementById("image-preview__image");
+      const previewDefaultText = document.getElementById("image-preview__default-text");
+      const cstmBtn = document.getElementById("custom-button");
+      const cstmTxt = document.getElementById("custom-text");
+     
+      cstmBtn.addEventListener("click", function() {
+        
+        inpFile.click();
+
+        });
+      inpFile.addEventListener("change", function() {
+        
+        const file = this.files[0];
+        if (file) {
+
+          const reader = new FileReader();
+
+          previewDefaultText.style.display = "none";
+          previewImage.style.display = "block";
+
+        
+
+          reader.addEventListener("load", function() {
+            console.log(this);
+            previewImage.setAttribute("src", this.result);
+
+          });
+
+          reader.readAsDataURL(file);
+        } else {
+           
+           previewDefaultText.style.display = null;
+           previewImage.style.display = null;
+           previewImage.setAttribute("src", "");
+        }
+
+          if(inpFile.value) {
+
+            cstmTxt.innerHTML = inpFile.value.match(
+      /[\/\\]([\w\d\s\.\-\(\)]+)$/
+    )[1];
+
+          }
+
+          else {
+
+             cstmTxt.innerHTML = "No file chossen yet";
+          }
+
+        });
+      
+    </script>
+
+  </body>
+</html>
